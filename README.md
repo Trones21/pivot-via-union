@@ -1,3 +1,12 @@
+Generates SQL statement to unpivot multiple tables/columns (Rows to columns)
+
+Background: I was creating a data quality dashboard in Tableau and I needed to pivot the data. Unfortunately the data source was SAP HANA, so I did not have PIVOT/UNPIVOT operators... and even if I did sql is super messy.
+
+So what do you do when you have thousands of lines of repetitive SQL Generate it of course! 
+
+I was considering using cursors or Userdefinedfunctions,
+but those would be DB specific, this is standard SQL, so it will work on any relational DB.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
