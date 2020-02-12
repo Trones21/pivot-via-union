@@ -50,7 +50,7 @@ export default class Field extends Component {
   render() {
     const { focused, value, error, label } = this.state;
     const { id, type, locked } = this.props;
-    const fieldClassName = `field ${(locked ? focused : focused || value) && 'focussed'} ${locked && !focused && 'locked'}`;
+    const fieldClassName = `field useSpace ${(locked ? focused : focused || value) && 'focused'} ${locked && !focused && 'locked'}`;
     return (
       <div className={fieldClassName}>
         <input
