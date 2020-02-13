@@ -1,73 +1,54 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { TableForm } from "./TableForm";
 
 
-export function TableFormList(){
+export function TableFormList() {
+
     const [tables, setTables] = useState([]);
-    
+    const [SQLCombined, setSQLCombined] = useState({});
+
+    const test = () => {
+        let id = 2;
+        //console.log(tables.find((i) => (i.id === id),id)); 
+        console.log(tables.filter((i) => (i.id !== id), id));
+    }
+
+    const SQLtoClipboard = () => {
+
+    }
+
     const addTable = () => {
-        let newTablekey = {id: tables.length, isCollapsed: false};
-        setTables(tables => [...tables, newTablekey])
-        console.log("addTable");
+        let newTable = { id: tables.length, isCollapsed: false };
+        setTables(tables => [...tables, newTable])
     }
 
-    const removeTablet = () => {
-    
-    const key = 1; 
-    const testArr = [{id:1,op:"adsad"}, {id:2,op:"adsad"},{id:3,op:"adsad"} ];
-    console.log(key);
-    console.log(testArr[key].id);
-    const fml = testArr.filter( (el) => (el.id !== key));
-    console.log(fml)
+    const getchildsSQL = (id, sql) => {
+        const table = tables.find((i) => (i.id === id), id);
+        table.sql = sql;
+        let updatedTables = [...tables.filter((i) => (i.id !== id), id), table];
+        setTables(updatedTables);
     }
 
-
-//  const removeTable = (id) => {}
-    const removeTable = (tableId) => {
-        console.log("Number of tables:")
-        console.log(tables);
-        console.log("Id Passed:")
-        console.log(tableId);
-        const newArray = tables.filter((el) => (el.id !== tableId)
-        );
-        console.log(newArray);
-        setTables(newArray)
-    }
-
-    const toggleForm = () => {};
-    // const toggleForm = (id) => {
-    //         console.log("pfc")
-    //         console.log(tables[id])
-    //         if(tables[id].isCollapsed === true){
-    //             //setTables()tables[id].isCollapsed = false;
-    //         } else {
-    //             let newArr = tables. 
-    //             tables[id].isCollapsed = true;
-    //         }
-    //     }
-    
 
     const TableForms = tables.map((t) =>
-       <TableForm  
-       key={t.id}
-       id={t.id}
-       isCollapsed={t.isCollapsed}
-       toggleForm={toggleForm}
-       removeMe={removeTable}/>
+        <TableForm
+            key={t.id}
+            id={t.id}
+            getSQL={getchildsSQL}
+            isCollapsed={t.isCollapsed}
+        />
     );
 
-    return(
-    <>
-    <ol>{TableForms}</ol>
-    <div>
-        <button onClick={""}>Collapse All</button>
-        <button onClick={addTable}>Add Table</button>
-        <button onClick={removeTablet}>test</button>
-        <button onClick={() => {console.log("NumTables via Separate Button:")
-        console.log(tables);}}>NumTables</button>
-        
-    </div>
-    </>
+    return (
+        <>
+                <div>
+                    <button onClick={""}>Collapse All</button>
+                    <button onClick={addTable}>Add Table</button>
+                    <button onClick={SQLtoClipboard}>Copy Full SQL to Clipboard</button>
+                    <button onClick={test}>Test</button>
+                </div>
+                <ol>{TableForms}</ol>
+        </>
     );
 }
 

@@ -22,7 +22,9 @@
 
 .App-main {
   display: flex;
-
+  width: 70vw;
+  align-items: center;
+  flex-direction: column;
 }
 
 .App-header {

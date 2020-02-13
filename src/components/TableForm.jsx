@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TextInput from './TextInput';
 import '../css/box.css';
 import '../css/TableForm.css'
@@ -12,7 +13,8 @@ const FormStyle = {
     alignItems: "center"
 }
 
-export class TableForm extends React.Component {
+
+export class TableForm extends React.Component {  
     constructor(props) {
         super(props);
         this.state = {
@@ -22,17 +24,20 @@ export class TableForm extends React.Component {
             columnList: [],
             dirtyColumnList: '',
             sql: '',
-            isCollapsed: props.isCollapsed || false
+            isCollapsed: props.isCollapsed || true
         };
         
-        this.toggleForm = () => 
-        {
-            props.toggleForm(props.id);
-        }
+        this.sendSQL = () => {props.getSQL(props.id, this.state.sql)};
         this.remove = () => {props.removeMe(props.id)};
         this.id = props.id; 
         this.handleColumnsChange = this.handleColumnsChange.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
+    }
+
+    toggleForm = () => {
+        this.state.isCollapsed === true ?
+            this.setState({isCollapsed: false}):
+            this.setState({isCollapsed: true});
     }
 
     //need to check why one letter remains when I delete most of the line
@@ -87,7 +92,8 @@ export class TableForm extends React.Component {
             let addthis = this.singleSQLstatement('')
             newSQL = newSQL + addthis;
         }
-        this.setState({ sql: newSQL })
+        //upate child - callback update parent
+        this.setState({ sql: newSQL }, this.sendSQL());
     }
 
    
@@ -95,18 +101,19 @@ export class TableForm extends React.Component {
 
         if(this.state.isCollapsed === true){
         return(
-                <div>
-                    {this.id}
-                    <button onClick={this.toggleForm}>Show/Hide</button>
-                </div>
+            <div className="collapsedForm">
+            <div style={{position:"relative", left:"0px", color:"white"}}>Table: {this.state.TableName}</div>
+            <div style={{position:"relative", right:"0px", color:"white"}}>id: {this.id}</div>
+            <button onClick={this.toggleForm}>Show/Hide</button>
+            </div>
         )}
         else
         return (
             <>
                 <div className="collapsedForm">
-                    <div style={{position:"absolute", right:"0px", color:"white"}}>id: {this.id}</div>
+                    <div style={{position:"relative", left:"0px", color:"white"}}>Table: {this.state.TableName}</div>
+                    <div style={{position:"absolute",  right:"0px", color:"white"}}>id: {this.id}</div>
                     <button onClick={this.toggleForm}>Show/Hide</button>
-                    <button onClick={this.remove}>Remove</button>
                 </div>
                 <form style={FormStyle}>
                     <TextInput
@@ -148,3 +155,8 @@ export class TableForm extends React.Component {
         );
     }
 }
+
+TableForm.propTypes = {
+    getSQL: PropTypes.func,
+}
+
