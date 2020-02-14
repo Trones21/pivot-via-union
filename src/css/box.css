@@ -1,4 +1,12 @@
 
+.boxesContainer{
+    display: flex;
+    flex-direction: row; 
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+
 .boxLayout{
 display: flex; 
 flex-direction: column;

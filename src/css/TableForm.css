@@ -1,6 +1,49 @@
-.collapsedForm{
-    background-color: rgb(0, 87, 61);
-    width: 100%;
-    position:relative;
+.Form {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
+
+.collapsedForm{
+    background-color: #272727;
+    width: 100%;
+    display:grid;
+    position:relative;
+    margin-bottom: 4px;
+
+}
+
+.shownForm{
+    background-color:  #16181d;
+    /* background-color: rgba(43, 42, 59, 0.979); */
+    width: 100%;
+    display:grid;
+    position:relative;
+    margin-bottom: 10px;
+
+}
+
+.formHeader{
+    position: relative;
+    height: 60px;
+    
+}
+
+.formHeader div{
+position: absolute;
+left: 10px;
+top: 20%; 
+color: white;
+font-size: 24px;
+}
+
+.formHeader img{
+    position: absolute;
+    right: 20px; 
+    top: 20%; 
+    color: black;
 }
