@@ -8,9 +8,9 @@ I was considering using cursors or Userdefinedfunctions,
 but those would be DB specific, this is standard SQL, so it will work on any relational DB.
 
 **To Do:**
-*create video and question mark icon for modal pop-up
-*fix font in the input boxes
-*Make onClick be full length of bar
+* create video and question mark icon for modal pop-up
+* fix font in the input boxes
+* Make onClick be full length of bar
 *Smooth transition when opening input area
 *Remove table option
 *Make unpivot logo nicer -- spin? Transparent 
